@@ -16,12 +16,12 @@ type Todo struct {
 }
 
 func main() {
-	fmt.Print("Hello, World!")
+	fmt.Print("Hello world")
 
 	app := fiber.New()
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "https://localhost:5173",
+		AllowOrigins: "http://localhost:5173",
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 
@@ -50,7 +50,7 @@ func main() {
 		id, err := c.ParamsInt("id")
 
 		if err != nil {
-			return c.Status(401).SendString("Invalid ID")
+			return c.Status(401).SendString("Invalid id")
 		}
 
 		for i, t := range todos {
@@ -59,6 +59,7 @@ func main() {
 				break
 			}
 		}
+
 		return c.JSON(todos)
 	})
 
@@ -66,5 +67,6 @@ func main() {
 		return c.JSON(todos)
 	})
 
-	log.Fatal(app.Listen(":5173"))
+	log.Fatal(app.Listen(":4000"))
+
 }
